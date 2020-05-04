@@ -1,6 +1,6 @@
 {
   "name": "dahmer-open-mailer",
-  "version": "0.1.0",
+  "version": "0.2.1",
   "description": "Mailing Service for gmail using NodeJS and nodemailer.",
   "main": "index.js",
   "scripts": {

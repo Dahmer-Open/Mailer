@@ -28,13 +28,77 @@ XOAuth2 authentication will be added in a future update.
 ### Installing
 
 A step by step series of examples that tell you how to get a development env running.
+**Be sure to read and complete the prerequisites section above.**
 
-1. Install the dependencies by running `npm i`;
-2. If your project doesn't have a `.env` file yet at its root, create it. This file will
-   contain the authentication credentials for your email and will not be pushed to your
-   repository.
-3. Add the `DO_MAILER_SERVICE`, `DO_MAILER_EMAIL` and `DO_MAILER_PASSWORD` variables with
-   your email credentials.
+1. Install the package by running `npm i --save dahmer-open-mailer`;
+2. Import the mailer;
+```Javascript
+  const Mailer = require("dahmer-open-mailer"); // ES5 Import
+```
+3. Define the transport and mailing options;
+```Javascript
+// See Node Mailer's documentation for all the options.
+// https://nodemailer.com/smtp/
+const transportOpts = {
+  service: "gmail", // Only gmail is currently supported.
+  secure: false,
+  auth: {
+    user: "your_gmail@gmail.com",
+    pass: "YourPassword"
+  }
+}
+
+// See Node Mailer's documentation for all the options.
+// https://nodemailer.com/message/
+const mailOpts = {
+  from: "your_gmail@gmail.com",
+  to: "some_target@email.com",
+  subject: "Mailer Test 📧",
+  text: "Congratulations! Your mailer is functional!"
+}
+```
+4. Create a mailer instance;
+```Javascript
+// Create the mailer instance
+let mailer = new Mailer(transportOpts);
+```
+5. Send the email;
+```Javascript
+// Send the email.
+mailer.sendMail(mailOpts);
+```
+
+#### Complete example
+
+```Javascript
+const Mailer = require("dahmer-open-mailer"); // ES5 Import
+
+// See Node Mailer's documentation for all the options.
+// https://nodemailer.com/smtp/
+const transportOpts = {
+  service: "gmail", // Only gmail is currently supported.
+  secure: false,
+  auth: {
+    user: "your_gmail@gmail.com",
+    pass: "YourPassword"
+  }
+}
+
+// See Node Mailer's documentation for all the options.
+// https://nodemailer.com/message/
+const mailOpts = {
+  from: "your_gmail@gmail.com",
+  to: "some_target@email.com",
+  subject: "Mailer Test 📧",
+  text: "Congratulations! Your mailer is functional!"
+}
+
+// Create the mailer instance
+let mailer = new Mailer(transportOpts);
+
+// Send the email.
+mailer.sendMail(mailOpts);
+```
 
 ## Running the tests
 
